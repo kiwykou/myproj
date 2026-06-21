@@ -4,7 +4,9 @@ using System.Text;
 
 namespace AvaloniaApplication26.Models
 {
-    internal class UserCourse
+     public class UserCourse
     {
+        public int UserId { get; set; }
+        public int CourseId { get; set; }
     }
 }

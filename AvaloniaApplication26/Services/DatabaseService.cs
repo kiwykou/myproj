@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AvaloniaApplication26.Services
 {
-    internal class DatabaseService
+    public class DatabaseService
     {
+        private readonly string _connectionString = "Data Source=apps.db";
+        public SqliteConnection GetConnection()
+        {
+            return new SqliteConnection(_connectionString); 
+        }
     }
 }
