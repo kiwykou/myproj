@@ -7,13 +7,22 @@ using System.Text;
 
 namespace AvaloniaApplication26.ViewModels
 {
-    public class CourseViewModel
+    public class CourseViewModel : ViewModelBase
     {
 
         private readonly CourseService _courseService;
         public ObservableCollection<Course> Courses { get; } = new();
 
-        public string NewCourseName { get; set; }
+        private string _newCourseName;
+        public string NewCourseName
+        {
+            get => _newCourseName;
+            set
+            {
+                _newCourseName = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand AddCourseCommand { get; }
         public RelayCommand DeleteCourseCommand { get; }

@@ -8,14 +8,33 @@ using System.ComponentModel;
 
 namespace AvaloniaApplication26.ViewModels
 {
-    public class UserViewModel
+    public class UserViewModel : ViewModelBase
     {
 
         private readonly UserService _userService;
         public ObservableCollection<User> Users { get; } = new();
 
-        public string NewUserName { get; set; }
-        public string NewUserSurname { get; set; }
+        private string _newUserName;
+        public string NewUserName
+        {
+            get => _newUserName;
+            set
+            {
+                _newUserName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _newUserSurname;
+        public string NewUserSurname
+        {
+            get => _newUserSurname;
+            set
+            {
+                _newUserSurname = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand AddUserCommand { get; }
         public RelayCommand DeleteUserCommand { get; }
@@ -40,6 +59,11 @@ namespace AvaloniaApplication26.ViewModels
 
         private void AddUser()
         {
+           
+            System.Diagnostics.Debug.WriteLine("🔥 КНОПКА РАБОТАЕТ!");
+
+            // весь остальной код...
+        
             if (string.IsNullOrWhiteSpace(NewUserName) || string.IsNullOrWhiteSpace(NewUserSurname))
                 return;
 

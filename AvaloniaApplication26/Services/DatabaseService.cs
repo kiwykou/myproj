@@ -7,7 +7,7 @@ namespace AvaloniaApplication26.Services
 {
     public class DatabaseService
     {
-        private readonly string _connectionString = "Data Source=apps.db";
+        private readonly string _connectionString = "Data Source=appsss.db";
         public SqliteConnection GetConnection()
         {
             return new SqliteConnection(_connectionString); 

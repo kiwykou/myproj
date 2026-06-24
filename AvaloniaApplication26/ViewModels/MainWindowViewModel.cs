@@ -7,7 +7,8 @@ using System.Text;
 
 namespace AvaloniaApplication26.ViewModels
 {
-        public class MainWindowViewModel
+        public class MainWindowViewModel : ViewModelBase
+
         {
             public UserViewModel UserViewModel { get; }
             public CourseViewModel CourseViewModel { get; }
@@ -20,6 +21,7 @@ namespace AvaloniaApplication26.ViewModels
                 set
                 {
                     _selectedUser = value;
+                OnPropertyChanged();
                     if (UserViewModel != null) UserViewModel.SelectedUser = value;
                     if (UserCourseViewModel != null) UserCourseViewModel.LoadCoursesForUser(value);
                 }
@@ -32,6 +34,7 @@ namespace AvaloniaApplication26.ViewModels
                 set
                 {
                     _selectedCourse = value;
+                OnPropertyChanged();
                     if (CourseViewModel != null) CourseViewModel.SelectedCourse = value;
                     if (UserCourseViewModel != null) UserCourseViewModel.SetCurrentCourse(value);
                 }

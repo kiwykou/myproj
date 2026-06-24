@@ -8,7 +8,7 @@ using AvaloniaApplication26.Models;
 
 namespace AvaloniaApplication26.ViewModels
 {
-        public class UserCourseViewModel
+        public class UserCourseViewModel : ViewModelBase
         {
             private readonly UserCourseService _userCourseService;
 
