@@ -8,17 +8,24 @@ using AvaloniaApplication26.Models;
 
 namespace AvaloniaApplication26.ViewModels
 {
+
     public class UserCourseViewModel : ViewModelBase
     {
-        private readonly UserCourseService _userCourseService;  // ← ЭТО ПОЛЕ
+        private readonly UserCourseService _userCourseService;
         public ObservableCollection<Course> UserCourses { get; } = new();
 
         private User _currentUser;
-        private Course _selectedCourse;
-        public Course SelectedCourse
+
+       
+        private Course _selectedUserCourse;
+        public Course SelectedUserCourse
         {
-            get => _selectedCourse;
-            set { _selectedCourse = value; OnPropertyChanged(); }
+            get => _selectedUserCourse;
+            set
+            {
+                _selectedUserCourse = value;
+                OnPropertyChanged();
+            }
         }
 
         public RelayCommand EnrollCommand { get; }
@@ -26,9 +33,9 @@ namespace AvaloniaApplication26.ViewModels
 
         public UserCourseViewModel(UserCourseService userCourseService)
         {
-            _userCourseService = userCourseService;  // ← СОХРАНЯЕМ
-            EnrollCommand = new RelayCommand(Enroll, () => _currentUser != null && SelectedCourse != null);
-            UnenrollCommand = new RelayCommand(Unenroll, () => _currentUser != null && SelectedCourse != null);
+            _userCourseService = userCourseService;
+            EnrollCommand = new RelayCommand(Enroll, () => _currentUser != null && SelectedUserCourse != null);
+            UnenrollCommand = new RelayCommand(Unenroll, () => _currentUser != null && SelectedUserCourse != null);
         }
 
         public void LoadCoursesForUser(User user)
@@ -36,44 +43,46 @@ namespace AvaloniaApplication26.ViewModels
             _currentUser = user;
             UserCourses.Clear();
             if (user == null) return;
-            foreach (var c in _userCourseService.GetCoursesForUser(user.Id))  // ← _userCourseService
+            foreach (var c in _userCourseService.GetCoursesForUser(user.Id))
                 UserCourses.Add(c);
         }
 
-        public void SetCurrentCourse(Course course) => SelectedCourse = course;
+        public void SetCurrentCourse(Course course)
+        {
+            SelectedUserCourse = course;
+        }
 
-        // Методы, которые вызывает MainWindowViewModel
         public void AddUserToCourse(int userId, int courseId)
         {
-            _userCourseService.AddUserToCourse(userId, courseId);  // ← _userCourseService
+            _userCourseService.AddUserToCourse(userId, courseId);
         }
 
         public void RemoveUserFromCourse(int userId, int courseId)
         {
-            _userCourseService.RemoveUserFromCourse(userId, courseId);  // ← _userCourseService
+            _userCourseService.RemoveUserFromCourse(userId, courseId);
         }
 
         public void DeleteAllCoursesForUser(int userId)
         {
-            _userCourseService.DeleteAllCoursesForUser(userId);  // ← _userCourseService
+            _userCourseService.DeleteAllCoursesForUser(userId);
         }
 
         public void DeleteAllUsersForCourse(int courseId)
         {
-            _userCourseService.DeleteAllUsersForCourse(courseId);  // ← _userCourseService
+            _userCourseService.DeleteAllUsersForCourse(courseId);
         }
 
         private void Enroll()
         {
-            if (_currentUser == null || SelectedCourse == null) return;
-            _userCourseService.AddUserToCourse(_currentUser.Id, SelectedCourse.Id);  // ← _userCourseService
+            if (_currentUser == null || SelectedUserCourse == null) return;
+            _userCourseService.AddUserToCourse(_currentUser.Id, SelectedUserCourse.Id);
             LoadCoursesForUser(_currentUser);
         }
 
         private void Unenroll()
         {
-            if (_currentUser == null || SelectedCourse == null) return;
-            _userCourseService.RemoveUserFromCourse(_currentUser.Id, SelectedCourse.Id);  // ← _userCourseService
+            if (_currentUser == null || SelectedUserCourse == null) return;
+            _userCourseService.RemoveUserFromCourse(_currentUser.Id, SelectedUserCourse.Id);
             LoadCoursesForUser(_currentUser);
         }
     }

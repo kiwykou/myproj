@@ -73,6 +73,10 @@ namespace AvaloniaApplication26.ViewModels
 
         private void AddUser()
         {
+        
+            System.Diagnostics.Debug.WriteLine("🔥🔥🔥 КНОПКА ТОЧНО НАЖАТА!");
+
+        
             if (string.IsNullOrWhiteSpace(NewUserName) || string.IsNullOrWhiteSpace(NewUserSurname))
                 return;
             var u = new User
