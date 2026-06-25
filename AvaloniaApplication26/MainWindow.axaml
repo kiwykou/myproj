@@ -8,44 +8,43 @@
         x:Class="AvaloniaApplication26.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Title="AvaloniaApplication26">
-  <Grid Margin="10">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
 
-    <!-- Добавление пользователя -->
-    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
-        <TextBox Text="{Binding UserViewModel.NewUserName}" Watermark="Имя" Width="120"/>
-        <TextBox Text="{Binding UserViewModel.NewUserSurname}" Watermark="Фамилия" Width="120"/>
-        <Button Command="{Binding UserViewModel.AddUserCommand}" Content="+ Пользователь" Margin="5,0"/>
-        <Button Command="{Binding UserViewModel.DeleteUserCommand}" Content="- Удалить" Margin="5,0"/>
-    </StackPanel>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <!-- Добавление курса -->
-    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
-        <TextBox Text="{Binding CourseViewModel.NewCourseName}" Watermark="Название курса" Width="150"/>
-        <Button Command="{Binding CourseViewModel.AddCourseCommand}" Content="+ Курс" Margin="5,0"/>
-        <Button Command="{Binding CourseViewModel.DeleteCourseCommand}" Content="- Удалить" Margin="5,0"/>
-    </StackPanel>
-
-    <!-- Три колонки -->
-    <Grid Grid.Row="2" ColumnDefinitions="*,*,*">
-        <DataGrid Grid.Column="0" ItemsSource="{Binding UserViewModel.Users}" 
-                  SelectedItem="{Binding SelectedUser}"
-                  AutoGenerateColumns="True" Margin="0,0,5,0"/>
-        <DataGrid Grid.Column="1" ItemsSource="{Binding CourseViewModel.Courses}" 
-                  SelectedItem="{Binding SelectedCourse}"
-                  AutoGenerateColumns="True" Margin="5,0,5,0"/>
-        <StackPanel Grid.Column="2" Margin="5,0,0,0">
-            <TextBlock Text="Курсы ученика" FontWeight="Bold" Margin="0,0,0,5"/>
-            <ListBox ItemsSource="{Binding UserCourseViewModel.UserCourses}" 
-                     DisplayMemberBinding="{Binding CourseName}" Height="200"/>
-            <Button Command="{Binding UserCourseViewModel.EnrollCommand}" Content="Записать на курс" Margin="0,5,0,5"/>
-            <Button Command="{Binding UserCourseViewModel.UnenrollCommand}" Content="Отписать от курса"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBox Text="{Binding UserViewModel.NewUserName}" Watermark="Имя" Width="120"/>
+            <TextBox Text="{Binding UserViewModel.NewUserSurname}" Watermark="Фамилия" Width="120"/>
+            <Button Command="{Binding UserViewModel.AddUserCommand}" Content="+ Пользователь" Margin="5,0"/>
+            <Button Command="{Binding UserViewModel.DeleteUserCommand}" Content="- Удалить" Margin="5,0"/>
         </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBox Text="{Binding CourseViewModel.NewCourseName}" Watermark="Название курса" Width="150"/>
+            <Button Command="{Binding CourseViewModel.AddCourseCommand}" Content="+ Курс" Margin="5,0"/>
+            <Button Command="{Binding CourseViewModel.DeleteCourseCommand}" Content="- Удалить" Margin="5,0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,*,*">
+            <DataGrid Grid.Column="0" ItemsSource="{Binding UserViewModel.Users}" 
+                      SelectedItem="{Binding SelectedUser}"
+                      AutoGenerateColumns="True" Margin="0,0,5,0"/>
+            <DataGrid Grid.Column="1" ItemsSource="{Binding CourseViewModel.Courses}" 
+                      SelectedItem="{Binding SelectedCourse}"
+                      AutoGenerateColumns="True" Margin="5,0,5,0"/>
+            <StackPanel Grid.Column="2" Margin="5,0,0,0">
+                <TextBlock Text="Курсы ученика" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ListBox ItemsSource="{Binding UserCourseViewModel.UserCourses}" 
+                         SelectedItem="{Binding UserCourseViewModel.SelectedCourse}"
+                         DisplayMemberBinding="{Binding CourseName}" Height="200"/>
+                <Button Command="{Binding UserCourseViewModel.EnrollCommand}" Content="Записать на курс" Margin="0,5,0,5"/>
+                <Button Command="{Binding UserCourseViewModel.UnenrollCommand}" Content="Отписать от курса"/>
+            </StackPanel>
+        </Grid>
     </Grid>
-</Grid>
-    
 </Window>
+

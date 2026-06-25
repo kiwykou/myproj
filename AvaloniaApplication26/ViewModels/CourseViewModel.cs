@@ -9,7 +9,6 @@ namespace AvaloniaApplication26.ViewModels
 {
     public class CourseViewModel : ViewModelBase
     {
-
         private readonly CourseService _courseService;
         public ObservableCollection<Course> Courses { get; } = new();
 
@@ -17,23 +16,23 @@ namespace AvaloniaApplication26.ViewModels
         public string NewCourseName
         {
             get => _newCourseName;
-            set
-            {
-                _newCourseName = value;
-                OnPropertyChanged();
-            }
+            set { _newCourseName = value; OnPropertyChanged(); }
+        }
+
+        private Course _selectedCourse;
+        public Course SelectedCourse
+        {
+            get => _selectedCourse;
+            set { _selectedCourse = value; OnPropertyChanged(); }
         }
 
         public RelayCommand AddCourseCommand { get; }
         public RelayCommand DeleteCourseCommand { get; }
 
-        public Course SelectedCourse { get; set; }
-
         public CourseViewModel(CourseService courseService)
         {
             _courseService = courseService;
             LoadCourses();
-
             AddCourseCommand = new RelayCommand(AddCourse);
             DeleteCourseCommand = new RelayCommand(() => DeleteCourse(SelectedCourse));
         }
@@ -45,13 +44,16 @@ namespace AvaloniaApplication26.ViewModels
                 Courses.Add(c);
         }
 
-        private void AddCourse()
+        public void AddCourse(Course course)
         {
-            if (string.IsNullOrWhiteSpace(NewCourseName)) return;
-            var c = new Course { CourseName = NewCourseName, Description = "", Price = 0, Duration = 0 };
-            _courseService.AddCourse(c);
+            _courseService.AddCourse(course);
             LoadCourses();
-            NewCourseName = "";
+        }
+
+        public void DeleteCourse(int courseId)
+        {
+            _courseService.DeleteCourse(courseId);
+            LoadCourses();
         }
 
         public void DeleteCourse(Course course)
@@ -60,6 +62,22 @@ namespace AvaloniaApplication26.ViewModels
             _courseService.DeleteCourse(course.Id);
             LoadCourses();
         }
+
+        private void AddCourse()
+        {
+            if (string.IsNullOrWhiteSpace(NewCourseName)) return;
+            var c = new Course
+            {
+                CourseName = NewCourseName,
+                Description = "",
+                Price = 0,
+                Duration = 0
+            };
+            _courseService.AddCourse(c);
+            LoadCourses();
+            NewCourseName = "";
+        }
     }
 }
+
 

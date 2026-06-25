@@ -24,7 +24,7 @@ namespace AvaloniaApplication26.Services
             if (!courseIds.Any())
                 return new List<Course>();
             return connection.Query<Course>(
-                                   "SELECT * FROM Course WHERE Id IN $CourseIds",
+                                   "SELECT * FROM Course WHERE Id IN @CourseIds",
                                    new { CourseIds = courseIds }
                 );
         }
@@ -50,6 +50,14 @@ namespace AvaloniaApplication26.Services
             connection.Execute(
                 "DELETE FROM UserCourse WHERE UserId = $UserId",
                 new { UserId = userId }
+                );
+        }
+        public void DeleteAllUsersForCourse(int courseId)
+        {
+            using var connection = _databaseService.GetConnection();
+            connection.Execute(
+                "DELETE FROM UserCourse WHERE CourseId = @CourseId",
+                new { CourseId = courseId }
                 );
         }
                

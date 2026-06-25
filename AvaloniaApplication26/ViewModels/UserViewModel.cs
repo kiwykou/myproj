@@ -10,7 +10,6 @@ namespace AvaloniaApplication26.ViewModels
 {
     public class UserViewModel : ViewModelBase
     {
-
         private readonly UserService _userService;
         public ObservableCollection<User> Users { get; } = new();
 
@@ -18,22 +17,21 @@ namespace AvaloniaApplication26.ViewModels
         public string NewUserName
         {
             get => _newUserName;
-            set
-            {
-                _newUserName = value;
-                OnPropertyChanged();
-            }
+            set { _newUserName = value; OnPropertyChanged(); }
         }
 
         private string _newUserSurname;
         public string NewUserSurname
         {
             get => _newUserSurname;
-            set
-            {
-                _newUserSurname = value;
-                OnPropertyChanged();
-            }
+            set { _newUserSurname = value; OnPropertyChanged(); }
+        }
+
+        private User _selectedUser;
+        public User SelectedUser
+        {
+            get => _selectedUser;
+            set { _selectedUser = value; OnPropertyChanged(); }
         }
 
         public RelayCommand AddUserCommand { get; }
@@ -43,12 +41,9 @@ namespace AvaloniaApplication26.ViewModels
         {
             _userService = userService;
             LoadUsers();
-
             AddUserCommand = new RelayCommand(AddUser);
             DeleteUserCommand = new RelayCommand(() => DeleteUser(SelectedUser));
         }
-
-        public User SelectedUser { get; set; }
 
         public void LoadUsers()
         {
@@ -57,21 +52,34 @@ namespace AvaloniaApplication26.ViewModels
                 Users.Add(u);
         }
 
+        public void AddUser(User user)
+        {
+            _userService.AddUser(user);
+            LoadUsers();
+        }
+
+        public void DeleteUser(int userId)
+        {
+            _userService.DeleteUser(userId);
+            LoadUsers();
+        }
+
+        public void DeleteUser(User user)
+        {
+            if (user == null) return;
+            _userService.DeleteUser(user.Id);
+            LoadUsers();
+        }
+
         private void AddUser()
         {
-           
-            System.Diagnostics.Debug.WriteLine("🔥 КНОПКА РАБОТАЕТ!");
-
-            // весь остальной код...
-        
             if (string.IsNullOrWhiteSpace(NewUserName) || string.IsNullOrWhiteSpace(NewUserSurname))
                 return;
-
             var u = new User
             {
                 Name = NewUserName,
                 Surname = NewUserSurname,
-                ClassNumber = "11А",
+                ClassNumber = "11A",
                 City = "Москва",
                 StudentPhone = "",
                 MotherName = "",
@@ -83,13 +91,6 @@ namespace AvaloniaApplication26.ViewModels
             LoadUsers();
             NewUserName = "";
             NewUserSurname = "";
-        }
-
-        public void DeleteUser(User user)
-        {
-            if (user == null) return;
-            _userService.DeleteUser(user.Id);
-            LoadUsers();
         }
     }
 }

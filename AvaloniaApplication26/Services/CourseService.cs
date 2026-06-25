@@ -28,7 +28,7 @@ namespace AvaloniaApplication26.Services
         {
             using var connection = _databaseService.GetConnection();
             string sql = @"
-                INSERT INTO Course (CourseName, Desciption, Price, Duration)
+                INSERT INTO Course (CourseName, Description, Price, Duration)
                 VALUES ($CourseName, $Description, $Price, $Duration)";
             connection.Execute(sql, course);
         }
