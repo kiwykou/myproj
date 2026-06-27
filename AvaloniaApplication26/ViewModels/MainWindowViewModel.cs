@@ -159,7 +159,7 @@ namespace AvaloniaApplication26.ViewModels
 
         public event EventHandler CanExecuteChanged;
 
-        // ⬅️ ЭТОТ МЕТОД ДОБАВЛЕН
+       
         public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);

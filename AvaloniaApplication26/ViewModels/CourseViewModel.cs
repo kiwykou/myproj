@@ -12,7 +12,7 @@ namespace AvaloniaApplication26.ViewModels
         private readonly CourseService _courseService;
         public ObservableCollection<Course> Courses { get; } = new();
 
-        // ===== ВСЕ СВОЙСТВА ДЛЯ ПОЛЕЙ ВВОДА =====
+      
         private string _newCourseName;
         public string NewCourseName
         {
@@ -48,7 +48,6 @@ namespace AvaloniaApplication26.ViewModels
             set { _selectedCourse = value; OnPropertyChanged(); }
         }
 
-        // ===== КОМАНДЫ =====
         public RelayCommand AddCourseCommand { get; }
         public RelayCommand DeleteCourseCommand { get; }
 
@@ -103,7 +102,7 @@ namespace AvaloniaApplication26.ViewModels
             _courseService.AddCourse(c);
             LoadCourses();
 
-            // Очищаем поля
+            
             NewCourseName = "";
             NewDescription = "";
             NewPrice = "";

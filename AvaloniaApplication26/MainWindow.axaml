@@ -19,7 +19,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- ===== ПОЛЬЗОВАТЕЛИ (на всю ширину) ===== -->
+       
         <TextBlock Grid.Row="0" Text="Пользователи" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Spacing="5">
@@ -36,7 +36,7 @@
             <Button Command="{Binding DeleteUserCommand}" Content="- Удалить" Margin="5,0"/>
         </StackPanel>
 
-        <!-- Таблица пользователей -->
+      
         <DataGrid Grid.Row="2" 
                   ItemsSource="{Binding UserViewModel.Users}" 
                   SelectedItem="{Binding SelectedUser}"
@@ -45,10 +45,10 @@
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"/>
 
-        <!-- ===== КУРСЫ (слева) + КУРСЫ УЧЕНИКА (справа) ===== -->
+      
         <Grid Grid.Row="3" Grid.RowSpan="2" ColumnDefinitions="*, 320">
             
-            <!-- ЛЕВАЯ КОЛОНКА: Курсы -->
+           
             <StackPanel Grid.Column="0">
                 <TextBlock Text="Курсы" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
 
@@ -61,7 +61,7 @@
                     <Button Command="{Binding DeleteCourseCommand}" Content="- Удалить" Margin="5,0"/>
                 </StackPanel>
 
-                <!-- Таблица курсов -->
+              
                 <DataGrid ItemsSource="{Binding CourseViewModel.Courses}" 
                           SelectedItem="{Binding SelectedCourse}"
                           AutoGenerateColumns="True" 
@@ -70,7 +70,7 @@
                           VerticalAlignment="Stretch"/>
             </StackPanel>
 
-            <!-- ПРАВАЯ КОЛОНКА: Курсы ученика -->
+        
             <StackPanel Grid.Column="1" Margin="15,0,0,0">
                 <TextBlock Text="Курсы ученика"
                            FontWeight="Bold"
