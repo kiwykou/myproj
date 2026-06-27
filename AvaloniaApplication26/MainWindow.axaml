@@ -10,6 +10,7 @@
         Title="AvaloniaApplication26">
    
    
+ 
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-       
+        <!-- ПОЛЬЗОВАТЕЛИ -->
         <TextBlock Grid.Row="0" Text="Пользователи" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Spacing="5">
@@ -32,23 +33,34 @@
             <TextBox Text="{Binding UserViewModel.NewFatherName}" Watermark="Папа" Width="100"/>
             <TextBox Text="{Binding UserViewModel.NewMotherPhone}" Watermark="Телефон мамы" Width="120"/>
             <TextBox Text="{Binding UserViewModel.NewFatherPhone}" Watermark="Телефон папы" Width="120"/>
-            <Button Command="{Binding AddUserCommand}" Content="+ Пользователь" Margin="5,0"/>
-            <Button Command="{Binding DeleteUserCommand}" Content="- Удалить" Margin="5,0"/>
+            <Button Command="{Binding UserViewModel.AddUserCommand}" Content="+ Пользователь" Margin="5,0"/>
+            <Button Command="{Binding UserViewModel.DeleteUserCommand}" Content="- Удалить" Margin="5,0"/>
         </StackPanel>
 
-      
         <DataGrid Grid.Row="2" 
                   ItemsSource="{Binding UserViewModel.Users}" 
                   SelectedItem="{Binding SelectedUser}"
-                  AutoGenerateColumns="True" 
                   Margin="0,0,0,10"
                   HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"/>
+                  VerticalAlignment="Stretch"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="40"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="100"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="100"/>
+                <DataGridTextColumn Header="Класс" Binding="{Binding ClassNumber}" Width="60"/>
+                <DataGridTextColumn Header="Город" Binding="{Binding City}" Width="100"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding StudentPhone}" Width="100"/>
+                <DataGridTextColumn Header="Мама" Binding="{Binding MotherName}" Width="100"/>
+                <DataGridTextColumn Header="Папа" Binding="{Binding FatherName}" Width="100"/>
+                <DataGridTextColumn Header="Телефон мамы" Binding="{Binding MotherPhone}" Width="100"/>
+                <DataGridTextColumn Header="Телефон папы" Binding="{Binding FatherPhone}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
-      
+        <!-- КУРСЫ + КУРСЫ УЧЕНИКА -->
         <Grid Grid.Row="3" Grid.RowSpan="2" ColumnDefinitions="*, 320">
             
-           
             <StackPanel Grid.Column="0">
                 <TextBlock Text="Курсы" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
 
@@ -57,44 +69,48 @@
                     <TextBox Text="{Binding CourseViewModel.NewDescription}" Watermark="Описание" Width="150"/>
                     <TextBox Text="{Binding CourseViewModel.NewPrice}" Watermark="Цена" Width="80"/>
                     <TextBox Text="{Binding CourseViewModel.NewDuration}" Watermark="Длительность" Width="80"/>
-                    <Button Command="{Binding AddCourseCommand}" Content="+ Курс" Margin="5,0"/>
-                    <Button Command="{Binding DeleteCourseCommand}" Content="- Удалить" Margin="5,0"/>
+                    <Button Command="{Binding CourseViewModel.AddCourseCommand}" Content="+ Курс" Margin="5,0"/>
+                    <Button Command="{Binding CourseViewModel.DeleteCourseCommand}" Content="- Удалить" Margin="5,0"/>
                 </StackPanel>
 
-              
                 <DataGrid ItemsSource="{Binding CourseViewModel.Courses}" 
                           SelectedItem="{Binding SelectedCourse}"
-                          AutoGenerateColumns="True" 
                           Margin="0,0,10,0"
                           HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"/>
+                          VerticalAlignment="Stretch"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="40"/>
+                        <DataGridTextColumn Header="Название" Binding="{Binding CourseName}" Width="150"/>
+                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="150"/>
+                        <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="80"/>
+                        <DataGridTextColumn Header="Длительность" Binding="{Binding Duration}" Width="80"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
 
-        
             <StackPanel Grid.Column="1" Margin="15,0,0,0">
-                <TextBlock Text="Курсы ученика"
-                           FontWeight="Bold"
-                           FontSize="16"
-                           Margin="0,0,0,10"/>
-                <TextBlock Text="Выберите пользователя"
-                           FontSize="12"
-                           Foreground="Gray"
-                           Margin="0,0,0,5"/>
-                <ListBox ItemsSource="{Binding UserCourseViewModel.UserCourses}"
+                <TextBlock Text="Курсы ученика" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <TextBlock Text="Выберите пользователя" FontSize="12" Foreground="Gray" Margin="0,0,0,5"/>
+
+                <ListBox ItemsSource="{Binding UserCourseViewModel.UserCourses}" 
                          SelectedItem="{Binding UserCourseViewModel.SelectedUserCourse}"
-                         DisplayMemberBinding="{Binding CourseName}"
+                         DisplayMemberBinding="{Binding CourseName}" 
                          Height="200"
                          HorizontalAlignment="Stretch"/>
-                <Button Command="{Binding EnrollCommand}"
-                        Content="Записать на курс"
-                        Margin="0,10,0,5"
+
+                <Button Command="{Binding EnrollCommand}" 
+                        Content="Записать на курс" 
+                        Margin="0,10,0,5" 
                         HorizontalAlignment="Stretch"/>
-                <Button Command="{Binding UnenrollCommand}"
-                        Content="Отписать от курса"
+
+                <Button Command="{Binding UnenrollCommand}" 
+                        Content="Отписать от курса" 
                         HorizontalAlignment="Stretch"/>
-                </StackPanel>
-            </Grid>
+            </StackPanel>
         </Grid>
+    </Grid>
 </Window>
+
 
 
