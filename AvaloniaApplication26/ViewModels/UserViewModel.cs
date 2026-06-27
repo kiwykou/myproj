@@ -8,11 +8,13 @@ using System.ComponentModel;
 
 namespace AvaloniaApplication26.ViewModels
 {
+
     public class UserViewModel : ViewModelBase
     {
         private readonly UserService _userService;
         public ObservableCollection<User> Users { get; } = new();
 
+        
         private string _newUserName;
         public string NewUserName
         {
@@ -25,6 +27,55 @@ namespace AvaloniaApplication26.ViewModels
         {
             get => _newUserSurname;
             set { _newUserSurname = value; OnPropertyChanged(); }
+        }
+
+        private string _newClassNumber;
+        public string NewClassNumber
+        {
+            get => _newClassNumber;
+            set { _newClassNumber = value; OnPropertyChanged(); }
+        }
+
+        private string _newCity;
+        public string NewCity
+        {
+            get => _newCity;
+            set { _newCity = value; OnPropertyChanged(); }
+        }
+
+        private string _newStudentPhone;
+        public string NewStudentPhone
+        {
+            get => _newStudentPhone;
+            set { _newStudentPhone = value; OnPropertyChanged(); }
+        }
+
+        private string _newMotherName;
+        public string NewMotherName
+        {
+            get => _newMotherName;
+            set { _newMotherName = value; OnPropertyChanged(); }
+        }
+
+        private string _newFatherName;
+        public string NewFatherName
+        {
+            get => _newFatherName;
+            set { _newFatherName = value; OnPropertyChanged(); }
+        }
+
+        private string _newMotherPhone;
+        public string NewMotherPhone
+        {
+            get => _newMotherPhone;
+            set { _newMotherPhone = value; OnPropertyChanged(); }
+        }
+
+        private string _newFatherPhone;
+        public string NewFatherPhone
+        {
+            get => _newFatherPhone;
+            set { _newFatherPhone = value; OnPropertyChanged(); }
         }
 
         private User _selectedUser;
@@ -41,6 +92,7 @@ namespace AvaloniaApplication26.ViewModels
         {
             _userService = userService;
             LoadUsers();
+
             AddUserCommand = new RelayCommand(AddUser);
             DeleteUserCommand = new RelayCommand(() => DeleteUser(SelectedUser));
         }
@@ -73,28 +125,37 @@ namespace AvaloniaApplication26.ViewModels
 
         private void AddUser()
         {
-        
-            System.Diagnostics.Debug.WriteLine("🔥🔥🔥 КНОПКА ТОЧНО НАЖАТА!");
 
-        
             if (string.IsNullOrWhiteSpace(NewUserName) || string.IsNullOrWhiteSpace(NewUserSurname))
                 return;
+
             var u = new User
             {
                 Name = NewUserName,
                 Surname = NewUserSurname,
-                ClassNumber = "11A",
-                City = "Москва",
-                StudentPhone = "",
-                MotherName = "",
-                FatherName = "",
-                MotherPhone = "",
-                FatherPhone = ""
+                ClassNumber = NewClassNumber,        
+                City = NewCity,                     
+                StudentPhone = NewStudentPhone,      
+                MotherName = NewMotherName,          
+                FatherName = NewFatherName,          
+                MotherPhone = NewMotherPhone,        
+                FatherPhone = NewFatherPhone         
             };
+
             _userService.AddUser(u);
             LoadUsers();
+
+            // Очищаем все поля
             NewUserName = "";
             NewUserSurname = "";
+            NewClassNumber = "";
+            NewCity = "";
+            NewStudentPhone = "";
+            NewMotherName = "";
+            NewFatherName = "";
+            NewMotherPhone = "";
+            NewFatherPhone = "";
         }
     }
 }
+             

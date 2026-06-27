@@ -2,82 +2,99 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="990" d:DesignHeight="590"
+        mc:Ignorable="d" d:DesignWidth="1500" d:DesignHeight="690"
         xmlns:vm="clr-namespace:AvaloniaApplication26.ViewModels"
-        Width="990" Height="590"
+        Width="1050" Height="690"
         x:Class="AvaloniaApplication26.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Title="AvaloniaApplication26">
+   
+   
     <Grid Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="250"/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- ===== ЛЕВАЯ КОЛОНКА ===== -->
+        <!-- ===== ПОЛЬЗОВАТЕЛИ (на всю ширину) ===== -->
+        <TextBlock Grid.Row="0" Text="Пользователи" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
 
-        <!-- Добавление пользователя -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,10">
-            <TextBox Text="{Binding UserViewModel.NewUserName}" Watermark="Имя" Width="120"/>
-            <TextBox Text="{Binding UserViewModel.NewUserSurname}" Watermark="Фамилия" Width="120"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Spacing="5">
+            <TextBox Text="{Binding UserViewModel.NewUserName}" Watermark="Имя" Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewUserSurname}" Watermark="Фамилия" Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewClassNumber}" Watermark="Класс" Width="80"/>
+            <TextBox Text="{Binding UserViewModel.NewCity}" Watermark="Город" Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewStudentPhone}" Watermark="Телефон" Width="120"/>
+            <TextBox Text="{Binding UserViewModel.NewMotherName}" Watermark="Мама" Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewFatherName}" Watermark="Папа" Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewMotherPhone}" Watermark="Телефон мамы" Width="120"/>
+            <TextBox Text="{Binding UserViewModel.NewFatherPhone}" Watermark="Телефон папы" Width="120"/>
             <Button Command="{Binding AddUserCommand}" Content="+ Пользователь" Margin="5,0"/>
             <Button Command="{Binding DeleteUserCommand}" Content="- Удалить" Margin="5,0"/>
         </StackPanel>
 
         <!-- Таблица пользователей -->
-        <DataGrid Grid.Row="1" Grid.Column="0" 
+        <DataGrid Grid.Row="2" 
                   ItemsSource="{Binding UserViewModel.Users}" 
                   SelectedItem="{Binding SelectedUser}"
                   AutoGenerateColumns="True" 
-                  Margin="0,0,10,10"
+                  Margin="0,0,0,10"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"/>
 
-        <!-- Добавление курса -->
-        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,10">
-            <TextBox Text="{Binding CourseViewModel.NewCourseName}" Watermark="Название курса" Width="150"/>
-            <Button Command="{Binding AddCourseCommand}" Content="+ Курс" Margin="5,0"/>
-            <Button Command="{Binding DeleteCourseCommand}" Content="- Удалить" Margin="5,0"/>
-        </StackPanel>
+        <!-- ===== КУРСЫ (слева) + КУРСЫ УЧЕНИКА (справа) ===== -->
+        <Grid Grid.Row="3" Grid.RowSpan="2" ColumnDefinitions="*, 320">
+            
+            <!-- ЛЕВАЯ КОЛОНКА: Курсы -->
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Курсы" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
 
-        <!-- Таблица курсов -->
-        <DataGrid Grid.Row="3" Grid.Column="0" 
-                  ItemsSource="{Binding CourseViewModel.Courses}" 
-                  SelectedItem="{Binding SelectedCourse}"
-                  AutoGenerateColumns="True" 
-                  Margin="0,0,10,0"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10" Spacing="5">
+                    <TextBox Text="{Binding CourseViewModel.NewCourseName}" Watermark="Название" Width="150"/>
+                    <TextBox Text="{Binding CourseViewModel.NewDescription}" Watermark="Описание" Width="150"/>
+                    <TextBox Text="{Binding CourseViewModel.NewPrice}" Watermark="Цена" Width="80"/>
+                    <TextBox Text="{Binding CourseViewModel.NewDuration}" Watermark="Длительность" Width="80"/>
+                    <Button Command="{Binding AddCourseCommand}" Content="+ Курс" Margin="5,0"/>
+                    <Button Command="{Binding DeleteCourseCommand}" Content="- Удалить" Margin="5,0"/>
+                </StackPanel>
 
-        <!-- ===== ПРАВАЯ КОЛОНКА (Курсы ученика) ===== -->
-        <StackPanel Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" Margin="10,0,0,0">
-            <TextBlock Text="Курсы ученика" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <!-- Таблица курсов -->
+                <DataGrid ItemsSource="{Binding CourseViewModel.Courses}" 
+                          SelectedItem="{Binding SelectedCourse}"
+                          AutoGenerateColumns="True" 
+                          Margin="0,0,10,0"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"/>
+            </StackPanel>
 
-            <TextBlock Text="Выберите пользователя" FontSize="12" Foreground="Gray" Margin="0,0,0,5"/>
-
-            <ListBox ItemsSource="{Binding UserCourseViewModel.UserCourses}" 
-                     SelectedItem="{Binding UserCourseViewModel.SelectedUserCourse}"
-                     DisplayMemberBinding="{Binding CourseName}" 
-                     Height="200"
-                     HorizontalAlignment="Stretch"/>
-
-            <Button Command="{Binding EnrollCommand}" 
-                    Content="Записать на курс" 
-                    Margin="0,10,0,5" 
-                    HorizontalAlignment="Stretch"/>
-
-            <Button Command="{Binding UnenrollCommand}" 
-                    Content="Отписать от курса" 
-                    HorizontalAlignment="Stretch"/>
-        </StackPanel>
-    </Grid>
+            <!-- ПРАВАЯ КОЛОНКА: Курсы ученика -->
+            <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                <TextBlock Text="Курсы ученика"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Margin="0,0,0,10"/>
+                <TextBlock Text="Выберите пользователя"
+                           FontSize="12"
+                           Foreground="Gray"
+                           Margin="0,0,0,5"/>
+                <ListBox ItemsSource="{Binding UserCourseViewModel.UserCourses}"
+                         SelectedItem="{Binding UserCourseViewModel.SelectedUserCourse}"
+                         DisplayMemberBinding="{Binding CourseName}"
+                         Height="200"
+                         HorizontalAlignment="Stretch"/>
+                <Button Command="{Binding EnrollCommand}"
+                        Content="Записать на курс"
+                        Margin="0,10,0,5"
+                        HorizontalAlignment="Stretch"/>
+                <Button Command="{Binding UnenrollCommand}"
+                        Content="Отписать от курса"
+                        HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
 </Window>
 
 

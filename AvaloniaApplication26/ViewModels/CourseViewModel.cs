@@ -12,11 +12,33 @@ namespace AvaloniaApplication26.ViewModels
         private readonly CourseService _courseService;
         public ObservableCollection<Course> Courses { get; } = new();
 
+        // ===== ВСЕ СВОЙСТВА ДЛЯ ПОЛЕЙ ВВОДА =====
         private string _newCourseName;
         public string NewCourseName
         {
             get => _newCourseName;
             set { _newCourseName = value; OnPropertyChanged(); }
+        }
+
+        private string _newDescription;
+        public string NewDescription
+        {
+            get => _newDescription;
+            set { _newDescription = value; OnPropertyChanged(); }
+        }
+
+        private string _newPrice;
+        public string NewPrice
+        {
+            get => _newPrice;
+            set { _newPrice = value; OnPropertyChanged(); }
+        }
+
+        private string _newDuration;
+        public string NewDuration
+        {
+            get => _newDuration;
+            set { _newDuration = value; OnPropertyChanged(); }
         }
 
         private Course _selectedCourse;
@@ -26,6 +48,7 @@ namespace AvaloniaApplication26.ViewModels
             set { _selectedCourse = value; OnPropertyChanged(); }
         }
 
+        // ===== КОМАНДЫ =====
         public RelayCommand AddCourseCommand { get; }
         public RelayCommand DeleteCourseCommand { get; }
 
@@ -33,6 +56,7 @@ namespace AvaloniaApplication26.ViewModels
         {
             _courseService = courseService;
             LoadCourses();
+
             AddCourseCommand = new RelayCommand(AddCourse);
             DeleteCourseCommand = new RelayCommand(() => DeleteCourse(SelectedCourse));
         }
@@ -65,17 +89,25 @@ namespace AvaloniaApplication26.ViewModels
 
         private void AddCourse()
         {
-            if (string.IsNullOrWhiteSpace(NewCourseName)) return;
+            if (string.IsNullOrWhiteSpace(NewCourseName))
+                return;
+
             var c = new Course
             {
                 CourseName = NewCourseName,
-                Description = "",
-                Price = 0,
-                Duration = 0
+                Description = NewDescription ?? "",
+                Price = decimal.TryParse(NewPrice, out var price) ? price : 0,
+                Duration = int.TryParse(NewDuration, out var duration) ? duration : 0
             };
+
             _courseService.AddCourse(c);
             LoadCourses();
+
+            // Очищаем поля
             NewCourseName = "";
+            NewDescription = "";
+            NewPrice = "";
+            NewDuration = "";
         }
     }
 }
