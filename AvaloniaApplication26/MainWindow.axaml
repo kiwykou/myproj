@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1500" d:DesignHeight="690"
         xmlns:vm="clr-namespace:AvaloniaApplication26.ViewModels"
-        Width="1050" Height="690"
+        Width="1500" Height="690"
         x:Class="AvaloniaApplication26.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Title="AvaloniaApplication26">
