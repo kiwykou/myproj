@@ -20,21 +20,51 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- ПОЛЬЗОВАТЕЛИ -->
-        <TextBlock Grid.Row="0" Text="Пользователи" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+      
+        <TextBlock Grid.Row="0"
+                   Text="Пользователи"
+                   FontWeight="Bold" 
+                   FontSize="16" 
+                   Margin="0,0,0,5"/>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Spacing="5">
-            <TextBox Text="{Binding UserViewModel.NewUserName}" Watermark="Имя" Width="100"/>
-            <TextBox Text="{Binding UserViewModel.NewUserSurname}" Watermark="Фамилия" Width="100"/>
-            <TextBox Text="{Binding UserViewModel.NewClassNumber}" Watermark="Класс" Width="80"/>
-            <TextBox Text="{Binding UserViewModel.NewCity}" Watermark="Город" Width="100"/>
-            <TextBox Text="{Binding UserViewModel.NewStudentPhone}" Watermark="Телефон" Width="120"/>
-            <TextBox Text="{Binding UserViewModel.NewMotherName}" Watermark="Мама" Width="100"/>
-            <TextBox Text="{Binding UserViewModel.NewFatherName}" Watermark="Папа" Width="100"/>
-            <TextBox Text="{Binding UserViewModel.NewMotherPhone}" Watermark="Телефон мамы" Width="120"/>
-            <TextBox Text="{Binding UserViewModel.NewFatherPhone}" Watermark="Телефон папы" Width="120"/>
-            <Button Command="{Binding UserViewModel.AddUserCommand}" Content="+ Пользователь" Margin="5,0"/>
-            <Button Command="{Binding UserViewModel.DeleteUserCommand}" Content="- Удалить" Margin="5,0"/>
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,10" 
+                    Spacing="5">
+
+            <TextBox Text="{Binding UserViewModel.NewUserName}" 
+                     Watermark="Имя"
+                     Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewUserSurname}"
+                     Watermark="Фамилия"
+                     Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewClassNumber}"
+                     Watermark="Класс"
+                     Width="80"/>
+            <TextBox Text="{Binding UserViewModel.NewCity}"
+                     Watermark="Город" 
+                     Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewStudentPhone}"
+                     Watermark="Телефон"
+                     Width="120"/>
+            <TextBox Text="{Binding UserViewModel.NewMotherName}"
+                     Watermark="Мама" 
+                     Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewFatherName}" 
+                     Watermark="Папа" 
+                     Width="100"/>
+            <TextBox Text="{Binding UserViewModel.NewMotherPhone}" 
+                     Watermark="Телефон мамы"
+                     Width="120"/>
+            <TextBox Text="{Binding UserViewModel.NewFatherPhone}" 
+                     Watermark="Телефон папы"
+                     Width="120"/>
+            <Button Command="{Binding UserViewModel.AddUserCommand}"
+                    Content="+ Пользователь" 
+                    Margin="5,0"/>
+            <Button Command="{Binding UserViewModel.DeleteUserCommand}" 
+                    Content="- Удалить" 
+                    Margin="5,0"/>
         </StackPanel>
 
         <DataGrid Grid.Row="2" 
@@ -45,32 +75,70 @@
                   VerticalAlignment="Stretch"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="40"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="100"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="100"/>
-                <DataGridTextColumn Header="Класс" Binding="{Binding ClassNumber}" Width="60"/>
-                <DataGridTextColumn Header="Город" Binding="{Binding City}" Width="100"/>
-                <DataGridTextColumn Header="Телефон" Binding="{Binding StudentPhone}" Width="100"/>
-                <DataGridTextColumn Header="Мама" Binding="{Binding MotherName}" Width="100"/>
-                <DataGridTextColumn Header="Папа" Binding="{Binding FatherName}" Width="100"/>
-                <DataGridTextColumn Header="Телефон мамы" Binding="{Binding MotherPhone}" Width="100"/>
-                <DataGridTextColumn Header="Телефон папы" Binding="{Binding FatherPhone}" Width="100"/>
+                <DataGridTextColumn Header="Id" 
+                                    Binding="{Binding Id}"
+                                    Width="40"/>
+                <DataGridTextColumn Header="Имя" 
+                                    Binding="{Binding Name}"
+                                    Width="100"/>
+                <DataGridTextColumn Header="Фамилия"
+                                    Binding="{Binding Surname}"
+                                    Width="100"/>
+                <DataGridTextColumn Header="Класс" 
+                                    Binding="{Binding ClassNumber}"
+                                    Width="60"/>
+                <DataGridTextColumn Header="Город"
+                                    Binding="{Binding City}"
+                                    Width="100"/>
+                <DataGridTextColumn Header="Телефон" 
+                                    Binding="{Binding StudentPhone}"
+                                    Width="100"/>
+                <DataGridTextColumn Header="Мама" 
+                                    Binding="{Binding MotherName}"
+                                    Width="100"/>
+                <DataGridTextColumn Header="Папа" 
+                                    Binding="{Binding FatherName}" 
+                                    Width="100"/>
+                <DataGridTextColumn Header="Телефон мамы" 
+                                    Binding="{Binding MotherPhone}"
+                                    Width="100"/>
+                <DataGridTextColumn Header="Телефон папы"
+                                    Binding="{Binding FatherPhone}"
+                                    Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- КУРСЫ + КУРСЫ УЧЕНИКА -->
-        <Grid Grid.Row="3" Grid.RowSpan="2" ColumnDefinitions="*, 320">
+     
+        <Grid Grid.Row="3" 
+              Grid.RowSpan="2" 
+              ColumnDefinitions="*, 320">
             
             <StackPanel Grid.Column="0">
-                <TextBlock Text="Курсы" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+                <TextBlock Text="Курсы" 
+                           FontWeight="Bold"
+                           FontSize="16" 
+                           Margin="0,0,0,5"/>
 
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10" Spacing="5">
-                    <TextBox Text="{Binding CourseViewModel.NewCourseName}" Watermark="Название" Width="150"/>
-                    <TextBox Text="{Binding CourseViewModel.NewDescription}" Watermark="Описание" Width="150"/>
-                    <TextBox Text="{Binding CourseViewModel.NewPrice}" Watermark="Цена" Width="80"/>
-                    <TextBox Text="{Binding CourseViewModel.NewDuration}" Watermark="Длительность" Width="80"/>
-                    <Button Command="{Binding CourseViewModel.AddCourseCommand}" Content="+ Курс" Margin="5,0"/>
-                    <Button Command="{Binding CourseViewModel.DeleteCourseCommand}" Content="- Удалить" Margin="5,0"/>
+                <StackPanel Orientation="Horizontal" 
+                            Margin="0,0,0,10"
+                            Spacing="5">
+                    <TextBox Text="{Binding CourseViewModel.NewCourseName}" 
+                             Watermark="Название"
+                             Width="150"/>
+                    <TextBox Text="{Binding CourseViewModel.NewDescription}" 
+                             Watermark="Описание" 
+                             Width="150"/>
+                    <TextBox Text="{Binding CourseViewModel.NewPrice}"
+                             Watermark="Цена"
+                             Width="80"/>
+                    <TextBox Text="{Binding CourseViewModel.NewDuration}"
+                             Watermark="Длительность" 
+                             Width="80"/>
+                    <Button Command="{Binding CourseViewModel.AddCourseCommand}"
+                            Content="+ Курс" Margin="5,0"/>
+                    <Button Command="{Binding CourseViewModel.DeleteCourseCommand}"
+                            Content="- Удалить"
+                            Margin="5,0"/>
                 </StackPanel>
 
                 <DataGrid ItemsSource="{Binding CourseViewModel.Courses}" 
@@ -80,11 +148,21 @@
                           VerticalAlignment="Stretch"
                           AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="40"/>
-                        <DataGridTextColumn Header="Название" Binding="{Binding CourseName}" Width="150"/>
-                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="150"/>
-                        <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="80"/>
-                        <DataGridTextColumn Header="Длительность" Binding="{Binding Duration}" Width="80"/>
+                        <DataGridTextColumn Header="Id"
+                                            Binding="{Binding Id}"
+                                            Width="40"/>
+                        <DataGridTextColumn Header="Название"
+                                            Binding="{Binding CourseName}"
+                                            Width="150"/>
+                        <DataGridTextColumn Header="Описание" 
+                                            Binding="{Binding Description}"
+                                            Width="150"/>
+                        <DataGridTextColumn Header="Цена" 
+                                            Binding="{Binding Price}"
+                                            Width="80"/>
+                        <DataGridTextColumn Header="Длительность"
+                                            Binding="{Binding Duration}"
+                                            Width="80"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

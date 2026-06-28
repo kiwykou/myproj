@@ -145,7 +145,7 @@ namespace AvaloniaApplication26.ViewModels
             _userService.AddUser(u);
             LoadUsers();
 
-            // Очищаем все поля
+         
             NewUserName = "";
             NewUserSurname = "";
             NewClassNumber = "";
